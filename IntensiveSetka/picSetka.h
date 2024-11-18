@@ -19,6 +19,8 @@ public:
 	UINT_PTR token;
 	int x;
 	int y;
+	int cur_x;
+	int cur_y;
 	double scaleX;
 	double scaleY;
 	bool fl_start;
@@ -30,6 +32,8 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
+	//прописать получение координат антенн относительно центра решетки
+	std::vector<std::vector<double>> GetPosAntenna();
 };
 
 

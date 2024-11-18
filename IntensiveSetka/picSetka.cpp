@@ -79,9 +79,10 @@ void picSetka::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	}
 
 	FontFamily my_font_family(L"Arial");
-	Gdiplus::Font my_font(&my_font_family, 14, FontStyleRegular, UnitPixel);
+	Gdiplus::Font my_font(&my_font_family, 40, FontStyleRegular, UnitPixel);
 	SolidBrush brush_font(Color(255, 0, 0, 0));
-
+	StringFormat my_format;
+	my_format.SetAlignment(StringAlignmentCenter);
 	for (int i = 0; i < x; i++) //рисуем пси (антенны)
 	{
 		for (int j = 0; j < y; j++)
@@ -90,8 +91,9 @@ void picSetka::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 				continue;
 
 			pt[0] = PointF(i, j);
-			matr.TransformPoints(pt);
-			draw_in_buffer.DrawString(L"Ψ", -1, &my_font, pt[0], &brush_font);
+			pt[1] = PointF(1, 1);
+			matr.TransformPoints(pt, 2);
+			draw_in_buffer.DrawString(L"Ψ", -1, &my_font, RectF(pt[0].X, pt[0].Y, pt[1].X, pt[1].Y), &my_format, &brush_font);
 		}
 	}
 
@@ -101,7 +103,7 @@ void picSetka::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 void picSetka::SetParam(int _x, int _y)
 {
 	x = _x; y = _y;
-	antenna = vector<vector<bool>>(y, vector<bool>(x, true));
+	antenna = vector<vector<bool>>(y, vector<bool>(x, false));
 }
 
 
@@ -109,9 +111,9 @@ void picSetka::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
 	fl_lbutton = true;
-	int my_x = (double)point.x / scaleX;
-	int my_y = (double)point.y / scaleY;
-	antenna[my_y][my_x] = !antenna[my_y][my_x];
+	cur_x = (double)point.x / scaleX;
+	cur_y = (double)point.y / scaleY;
+	antenna[cur_y][cur_x] = !antenna[cur_y][cur_x];
 	Invalidate(FALSE);
 	CStatic::OnLButtonDown(nFlags, point);
 }
@@ -120,14 +122,15 @@ void picSetka::OnLButtonDown(UINT nFlags, CPoint point)
 void picSetka::OnMouseMove(UINT nFlags, CPoint point) //подумать как избежать перерисовки быстрой (чтобы не мелькали)
 {
 	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
-	/*if (fl_lbutton)
+	int my_x = (double)point.x / scaleX;
+	int my_y = (double)point.y / scaleY;
+	if (fl_lbutton && (my_x != cur_x || my_y != cur_y))
 	{
-		int my_x = (double)point.x / scaleX;
-		int my_y = (double)point.y / scaleY;
-		antenna[my_y][my_x] = !antenna[my_y][my_x];
+		cur_x = my_x;
+		cur_y = my_y;
+		antenna[cur_y][cur_x] = !antenna[cur_y][cur_x];
 		Invalidate(FALSE);
-		Sleep(10);
-	}*/
+	}
 	CStatic::OnMouseMove(nFlags, point);
 }
 
