@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "picSetka.h"
 
 // Диалоговое окно CIntensiveSetkaDlg
 class CIntensiveSetkaDlg : public CDialogEx
@@ -30,4 +30,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+
+public:
+	picSetka my_antenna;
 };

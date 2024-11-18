@@ -26,6 +26,7 @@ CIntensiveSetkaDlg::CIntensiveSetkaDlg(CWnd* pParent /*=nullptr*/)
 void CIntensiveSetkaDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_SETKA, my_antenna);
 }
 
 BEGIN_MESSAGE_MAP(CIntensiveSetkaDlg, CDialogEx)
@@ -45,6 +46,7 @@ BOOL CIntensiveSetkaDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Крупный значок
 	SetIcon(m_hIcon, FALSE);		// Мелкий значок
 
+	my_antenna.SetParam(10, 10);
 	// TODO: добавьте дополнительную инициализацию
 
 	return TRUE;  // возврат значения TRUE, если фокус не передан элементу управления
