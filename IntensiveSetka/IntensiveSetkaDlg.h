@@ -4,6 +4,8 @@
 
 #pragma once
 #include "picSetka.h"
+#include "model.h"
+#include "Drawer.h"
 
 // Диалоговое окно CIntensiveSetkaDlg
 class CIntensiveSetkaDlg : public CDialogEx
@@ -33,4 +35,14 @@ protected:
 
 public:
 	picSetka my_antenna;
+	setka reshetka;
+	Drawer pic_intensive;
+	afx_msg void OnBnClickedButton1();
+	double lyamda;
+	double R;
+	double Ksosed;
+	int maxX;
+	int maxY;
+	afx_msg void OnBnClickedButton2();
+	afx_msg void OnBnClickedButton3();
 };

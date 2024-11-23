@@ -100,10 +100,10 @@ void picSetka::DrawItem(LPDRAWITEMSTRUCT lpDrawItemStruct)
 	wnd.DrawImage(&buffer, 0, 0, 0, 0, lpDrawItemStruct->rcItem.right, lpDrawItemStruct->rcItem.bottom, UnitPixel);
 }
 
-void picSetka::SetParam(int _x, int _y)
+void picSetka::SetParam(int _x, int _y, bool sost)
 {
 	x = _x; y = _y;
-	antenna = vector<vector<bool>>(y, vector<bool>(x, false));
+	antenna = vector<vector<bool>>(y, vector<bool>(x, sost));
 }
 
 
@@ -140,4 +140,22 @@ void picSetka::OnLButtonUp(UINT nFlags, CPoint point)
 	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
 	fl_lbutton = false;
 	CStatic::OnLButtonUp(nFlags, point);
+}
+
+std::vector<std::pair<double, double>> picSetka::GetPosAntenna()
+{
+	int sizeY = antenna.size();
+	int sizeX = antenna[0].size();
+	double centY = (double)(sizeY - 1.) / 2.;
+	double centX = (double)(sizeX - 1.) / 2.;
+	vector<pair<double, double>> res;
+	for (int i = 0; i < sizeY; i++)
+	{
+		for (int j = 0; j < sizeX; j++)
+		{
+			if (antenna[i][j])
+				res.push_back(pair<double, double>(j - centX, i - centY));
+		}
+	}
+	return res;
 }

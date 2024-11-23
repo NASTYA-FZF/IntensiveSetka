@@ -28,12 +28,12 @@ public:
 	//true - есть антенна, false - нет антенны
 	std::vector<std::vector<bool>> antenna;
 
-	void SetParam(int _x, int _y);
+	void SetParam(int _x, int _y, bool sost);
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	//прописать получение координат антенн относительно центра решетки
-	std::vector<std::vector<double>> GetPosAntenna();
+	std::vector<std::pair<double, double>> GetPosAntenna();
 };
 
 

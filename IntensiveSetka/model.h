@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <complex>
-
+//проверить как используется расстояние между соседями
 class setka
 {
 	double lyamda;
@@ -10,11 +10,14 @@ class setka
 	double Ksosed;
 	int maxX;
 	int maxY;
-	std::vector<std::pair<double, double>> antenna;
 	std::vector<std::vector<double>> intensive;
 
 public:
 	std::complex<double> CalcA(int x, int y, std::pair<double, double> pos_antenna);
 
-	void CalcIntensive();
+	void CalcIntensive(std::vector<std::pair<double, double>>& ants);
+
+	void Main(double l, double rad, double Ksos, int maxx, int maxy, std::vector<std::pair<double, double>>& ants);
+
+	std::vector<std::vector<double>> GetIntensive();
 };
