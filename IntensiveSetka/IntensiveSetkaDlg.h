@@ -45,4 +45,5 @@ public:
 	int maxY;
 	afx_msg void OnBnClickedButton2();
 	afx_msg void OnBnClickedButton3();
+	double stepSource;
 };

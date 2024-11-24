@@ -24,6 +24,7 @@ CIntensiveSetkaDlg::CIntensiveSetkaDlg(CWnd* pParent /*=nullptr*/)
 	, Ksosed(0.5)
 	, maxX(400)
 	, maxY(400)
+	, stepSource(0.1)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -38,6 +39,7 @@ void CIntensiveSetkaDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT3, Ksosed);
 	DDX_Text(pDX, IDC_EDIT4, maxX);
 	DDX_Text(pDX, IDC_EDIT5, maxY);
+	DDX_Text(pDX, IDC_EDIT6, stepSource);
 }
 
 BEGIN_MESSAGE_MAP(CIntensiveSetkaDlg, CDialogEx)
@@ -108,7 +110,7 @@ void CIntensiveSetkaDlg::OnBnClickedButton1()
 {
 	// TODO: добавьте свой код обработчика уведомлений
 	UpdateData();
-	reshetka.Main(lyamda, R, Ksosed, maxX, maxY, my_antenna.GetPosAntenna());
+	reshetka.Main(lyamda, R, Ksosed, maxX, maxY, stepSource, my_antenna.GetPosAntenna());
 	pic_intensive.SetMatr(reshetka.GetIntensive(), 0, 0, 0, false);
 	pic_intensive.Invalidate(FALSE);
 }

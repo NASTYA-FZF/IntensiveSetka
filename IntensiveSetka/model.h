@@ -8,6 +8,7 @@ class setka
 	//коэффициенты для длин волн
 	double R;
 	double Ksosed;
+	double stepSource;
 	int maxX;
 	int maxY;
 	std::vector<std::vector<double>> intensive;
@@ -17,7 +18,7 @@ public:
 
 	void CalcIntensive(std::vector<std::pair<double, double>>& ants);
 
-	void Main(double l, double rad, double Ksos, int maxx, int maxy, std::vector<std::pair<double, double>>& ants);
+	void Main(double l, double rad, double Ksos, int maxx, int maxy, double step, std::vector<std::pair<double, double>>& ants);
 
 	std::vector<std::vector<double>> GetIntensive();
 };

@@ -111,6 +111,7 @@ void picSetka::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
 	fl_lbutton = true;
+	SetCapture();
 	cur_x = (double)point.x / scaleX;
 	cur_y = (double)point.y / scaleY;
 	antenna[cur_y][cur_x] = !antenna[cur_y][cur_x];
@@ -124,6 +125,8 @@ void picSetka::OnMouseMove(UINT nFlags, CPoint point) //подумать как 
 	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
 	int my_x = (double)point.x / scaleX;
 	int my_y = (double)point.y / scaleY;
+	if (fl_lbutton && (my_x < 0 || my_x >= x || my_y < 0 || my_y >= y))
+		fl_lbutton = false;
 	if (fl_lbutton && (my_x != cur_x || my_y != cur_y))
 	{
 		cur_x = my_x;
@@ -139,6 +142,7 @@ void picSetka::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: добавьте свой код обработчика сообщений или вызов стандартного
 	fl_lbutton = false;
+	ReleaseCapture();
 	CStatic::OnLButtonUp(nFlags, point);
 }
 
